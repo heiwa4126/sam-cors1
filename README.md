@@ -2,6 +2,15 @@
 
 CORS(Cross-Origin Resource Sharing)のテスト環境をAWS SAMで展開する。
 
+- [sam-cors1](#sam-cors1)
+- [いるもの](#いるもの)
+- [デプロイ](#デプロイ)
+- [テスト](#テスト)
+  - [サンプルlambdaのメモ](#サンプルlambdaのメモ)
+- [削除](#削除)
+- [CROSメモ](#crosメモ)
+
+
 # いるもの
 
 * [AWS CLI](https://docs.aws.amazon.com/ja_jp/cli/latest/userguide/install-cliv2.html)
@@ -49,3 +58,45 @@ sam deploy --guided  # 最初の1回。2回目以降は `sam deploy`
 
 Outputの `S3URL` か `S3SecureURL` のURLに
 ブラウザからアクセスしてみてください。
+
+jQueryの$.ajaxを使って、かんたんなクロスドメインのテストが実行されます。
+
+## サンプルlambdaのメモ
+
+戻り値は以下のようなものです。
+
+```json
+{"message": "OK", "time": "2021-10-18 07:33:47.955417+00:00"}
+```
+
+* message - `OK`で固定
+* time - 現在時刻をUTCで
+
+# 削除
+
+```sh
+./delete_stack.sh
+```
+でスタックごと削除。
+
+
+# CROSメモ
+
+SAM(CFn)ではOPTIONSを作ってくれますが、
+個々のlambdaでも
+Access-Control-Allow-* 3つ
+を返す必要があります。
+
+Access-Control-Allow-Originは
+
+* null
+* `*`
+* オリジン1つ
+
+の、いずれかが指定できます。
+**「スペースで区切ってオリジンを複数指定」**
+は出来ません。
+
+OPTIONSの返すAccess-Control-Allow-* と
+GET,PUTの返すそれは同じである必要はありません。
+(Preflightの場合AND条件になるみたい)
