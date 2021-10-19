@@ -1,0 +1,77 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  sam-cors1
+
+  Sample SAM Template for sam-cors1
+
+Parameters:
+  BucketName:
+    Type: String
+    Default: www-cors1
+
+Globals:
+  Function:
+    Timeout: 3
+
+Resources:
+  Cors1ApiGw:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: Prod
+      Cors:
+        AllowOrigin: "'*'"
+        AllowHeaders: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+        AllowMethods: "'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT'"
+
+  HelloFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: hello/
+      Handler: app.lambda_handler
+      Runtime: python3.8
+      Events:
+        HelloWorld:
+          Type: Api
+          Properties:
+            Path: /hello
+            Method: get
+            RestApiId: !Ref Cors1ApiGw
+
+  HelloFunctionLogGroup:
+    Type: AWS::Logs::LogGroup
+    DependsOn: HelloFunction
+    Properties:
+      RetentionInDays: 7
+      LogGroupName: !Join ["", ["/aws/lambda/", !Ref HelloFunction]]
+
+  # テスト用WWWの置き場所
+  S3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      AccessControl: PublicRead
+      BucketName: !Ref BucketName
+      MetricsConfigurations:
+        - Id: EntireBucket
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: error.html
+    DeletionPolicy: Delete
+
+
+Outputs:
+  HelloApiURL:
+    Description: "API Gateway endpoint URL for Prod stage for Hello function"
+    Value: !Sub "https://${Cors1ApiGw}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
+
+  S3BucketName:
+    Description: Name of S3 bucket to hold website content
+    Value: !Ref S3Bucket
+
+  S3BucketURL:
+    Description: URL of S3 bucket to hold website content
+    Value: !Sub "http://${S3Bucket}.s3-website-${AWS::Region}.amazonaws.com/"
+
+  S3BucketSecureURL:
+    Description: URL of S3 bucket to hold website content
+    Value: !Sub "https://s3-${AWS::Region}.amazonaws.com/${S3Bucket}/index.html"
