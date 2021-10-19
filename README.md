@@ -1,9 +1,19 @@
 # sam-cors1
 
-CORS(Cross-Origin Resource Sharing)のテスト環境をAWS SAMで展開する。
+CORS(Cross-Origin Resource Sharing)のテスト環境をAWS SAMで展開します。
+
+デプロイがめんどうな人は
+
+* [1.tmplate.js](1.tmplate.js)
+* [hello/app.py](hello/app.py)
+
+だけでも参考になると思います。
+
+# 目次
 
 - [sam-cors1](#sam-cors1)
-- [いるもの](#いるもの)
+- [目次](#目次)
+- [デプロイに必要なもの](#デプロイに必要なもの)
 - [デプロイ](#デプロイ)
 - [テスト](#テスト)
   - [サンプルlambdaのメモ](#サンプルlambdaのメモ)
@@ -11,7 +21,7 @@ CORS(Cross-Origin Resource Sharing)のテスト環境をAWS SAMで展開する�
 - [CROSメモ](#crosメモ)
 
 
-# いるもの
+# デプロイに必要なもの
 
 * [AWS CLI](https://docs.aws.amazon.com/ja_jp/cli/latest/userguide/install-cliv2.html)
 * [AWS SAM CLI](https://docs.aws.amazon.com/ja_jp/serverless-application-model/latest/developerguide/serverless-sam-cli-install-linux.html)
@@ -72,12 +82,13 @@ jQueryの$.ajaxを使って、かんたんなクロスドメインのテスト�
 * message - `OK`で固定
 * time - 現在時刻をUTCで
 
+
 # 削除
 
 ```sh
 ./delete_stack.sh
 ```
-でスタックごと削除。
+でスタックごと削除してください。
 
 
 # CROSメモ
