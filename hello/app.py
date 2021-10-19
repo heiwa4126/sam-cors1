@@ -8,8 +8,8 @@ def lambda_handler(event, context):
         "statusCode": 200,
         # optionsだけでなく、こちらにも要る
         "headers": {
-            # "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Origin": "https://www.360x180.net",
+            "Access-Control-Allow-Origin": "*",
+            # "Access-Control-Allow-Origin": "https://www.example.net",
             # 複数指定はできない↓
             # "Access-Control-Allow-Origin": "https://www.example.net http://www.example.com",
             "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token",

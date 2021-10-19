@@ -7,3 +7,4 @@ STACK_NAME=`tomlq -r .default.deploy.parameters.stack_name samconfig.toml`
 aws cloudformation delete-stack \
     --region "$REGION" \
     --stack-name "$STACK_NAME"
+    jq -r '.Stacks[0].Outputs[]|select(.OutputKey=="HelloApiURL").OutputValue')

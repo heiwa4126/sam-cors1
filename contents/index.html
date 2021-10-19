@@ -2,18 +2,19 @@
 <html>
  <head lang="en">
   <meta charset="utf-8">
-  <title>CORS1</title>
+  <title>SAM-CORS1</title>
   </style>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" type="text/javascript"></script>
   <script src="js/1.js" type="text/javascript"></script>
  </head>
  <body>
-  <h1>CORS1</h1>
-  <p id="msg1">1</p>
-  <p id="msg2">2</p>
-  <p id="msg3">3</p>
-  <script>
-   $(ex1);
-  </script>
+  <h1>SAM-CORS1</h1>
+  <h2>1. 同じオリジンから読む(スタティックファイル)</h2>
+  <p id="msg1">error</p>
+  <h2>2. 違うオリジンから読む</h2>
+  <p id="msg2">error</p>
+  <h2>3. 違うオリジンから読む(preflightつき)</h2>
+  <p id="msg3">error</p>
+  <script>$(ex1);</script>
  </body>
 </html>

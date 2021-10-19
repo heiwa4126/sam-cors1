@@ -64,14 +64,10 @@ Outputs:
     Description: "API Gateway endpoint URL for Prod stage for Hello function"
     Value: !Sub "https://${Cors1ApiGw}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
 
-  S3BucketName:
-    Description: Name of S3 bucket to hold website content
-    Value: !Ref S3Bucket
-
-  S3BucketURL:
+  S3URL:
     Description: URL of S3 bucket to hold website content
     Value: !Sub "http://${S3Bucket}.s3-website-${AWS::Region}.amazonaws.com/"
 
-  S3BucketSecureURL:
-    Description: URL of S3 bucket to hold website content
+  S3SecureURL:
+    Description: Secure URL of S3 bucket to hold website content
     Value: !Sub "https://s3-${AWS::Region}.amazonaws.com/${S3Bucket}/index.html"
