@@ -73,7 +73,7 @@ jQueryの$.ajaxを使って、かんたんなクロスドメインのテスト�
 
 ## サンプルlambdaのメモ
 
-戻り値は以下のようなものです。
+lambda APIの戻り値は以下のようなものです。
 
 ```json
 {"message": "OK", "time": "2021-10-18 07:33:47.955417+00:00"}
@@ -82,13 +82,16 @@ jQueryの$.ajaxを使って、かんたんなクロスドメインのテスト�
 * message - `OK`で固定
 * time - 現在時刻をUTCで
 
+js/1.jsではこのうちtimeを表示します。
+
 
 # 削除
 
+実験が終わったら
 ```sh
 ./delete_stack.sh
 ```
-でスタックごと削除してください。
+で、S3の中身とスタックを削除してください。
 
 
 # CROSメモ
@@ -115,5 +118,19 @@ Access-Control-Allow-Originは
 は出来ません。
 
 OPTIONSの返すAccess-Control-Allow-* と
-GET,PUTの返すそれは同じである必要はありません。
-(Preflightの場合AND条件になるみたい)
+GET,PUTの返すそれは同じである必要はありません
+(Preflightの場合AND条件になるみたい)。
+CFnだと、プリフライトのOPTIONSの返すAccess-Control-Allow-*はゆるめに、
+個々のAPIではきつめにせざるおえないみたい。
+
+オリジンはドメインとはちがいます。
+オリジンはスキーマとドメイン、ポートはオプション。
+
+正しいオリジン例:
+- http://www.example.com
+- https://www.example.com
+- http://www.example.com:8080
+
+正しくないオリジン例:
+- www.example.com
+- http://www.example.com/
