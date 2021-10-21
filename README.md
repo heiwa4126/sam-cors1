@@ -98,6 +98,9 @@ SAM(CFn)ではOPTIONSを作ってくれますが、
 Access-Control-Allow-* 3つ
 を返す必要があります。
 
+いまのCFnテンプレートの設定だと
+全部のAPIに同じ設定のCORSのOPTIONSがついてしまう。
+
 Access-Control-Allow-Originは
 
 * null

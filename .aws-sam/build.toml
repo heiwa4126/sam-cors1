@@ -6,6 +6,6 @@ codeuri = "/home/heiwa/works/aws/sam/sam-cors1/hello"
 runtime = "python3.8"
 source_md5 = ""
 packagetype = "Zip"
-functions = ["HelloFunction"]
+functions = ["HelloFunction", "GoodbyeFunction"]
 
 [layer_build_definitions]

@@ -9,6 +9,9 @@ Parameters:
   BucketName:
     Type: String
     Default: www-cors1
+  StageName:
+    Type: String
+    Default: Prod
 
 Globals:
   Function:
@@ -18,7 +21,7 @@ Resources:
   Cors1ApiGw:
     Type: AWS::Serverless::Api
     Properties:
-      StageName: Prod
+      StageName: !Ref StageName
       Cors:
         AllowOrigin: "'*'"
         AllowHeaders: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
@@ -45,6 +48,27 @@ Resources:
       RetentionInDays: 7
       LogGroupName: !Join ["", ["/aws/lambda/", !Ref HelloFunction]]
 
+  GoodbyeFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: hello/           # helloと共用
+      Handler: app.lambda_handler
+      Runtime: python3.8
+      Events:
+        GoodbyeWorld:
+          Type: Api
+          Properties:
+            Path: /goodbye
+            Method: get
+            RestApiId: !Ref Cors1ApiGw
+
+  GoodbyeFunctionLogGroup:
+    Type: AWS::Logs::LogGroup
+    DependsOn: GoodbyeFunction
+    Properties:
+      RetentionInDays: 7
+      LogGroupName: !Join ["", ["/aws/lambda/", !Ref GoodbyeFunction]]
+
   # テスト用WWWの置き場所
   S3Bucket:
     Type: AWS::S3::Bucket
@@ -62,7 +86,11 @@ Resources:
 Outputs:
   HelloApiURL:
     Description: "API Gateway endpoint URL for Prod stage for Hello function"
-    Value: !Sub "https://${Cors1ApiGw}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
+    Value: !Sub "https://${Cors1ApiGw}.execute-api.${AWS::Region}.amazonaws.com/${StageName}/hello/"
+
+  GoodbyeApiURL:
+    Description: "API Gateway endpoint URL for Prod stage for Goodbye function"
+    Value: !Sub "https://${Cors1ApiGw}.execute-api.${AWS::Region}.amazonaws.com/${StageName}/goodbye/"
 
   S3URL:
     Description: URL of S3 bucket to hold website content

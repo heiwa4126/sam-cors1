@@ -1,6 +1,6 @@
 function ex1() {
 
-  let lambdaURL = "https://nrtwvsbjg2.execute-api.ap-northeast-1.amazonaws.com/Prod/hello/";
+  let lambdaURL = "https://akiy8fi9d1.execute-api.ap-northeast-1.amazonaws.com/Prod/hello/";
 
   // 1. 同じオリジンから読む
   $.ajax({
