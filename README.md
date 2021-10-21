@@ -100,6 +100,9 @@ Access-Control-Allow-* 3つ
 
 いまのCFnテンプレートの設定だと
 全部のAPIに同じ設定のCORSのOPTIONSがついてしまう。
+AWS::Serverless::FunctionのPropertiesにはCorsがないので
+個別で指定することはできないみたい。
+
 
 Access-Control-Allow-Originは
 
