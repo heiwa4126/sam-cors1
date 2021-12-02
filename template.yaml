@@ -16,6 +16,8 @@ Parameters:
 Globals:
   Function:
     Timeout: 3
+  Api:
+    OpenApiVersion: 3.0.3
 
 Resources:
   Cors1ApiGw:
@@ -33,6 +35,9 @@ Resources:
       CodeUri: hello/
       Handler: app.lambda_handler
       Runtime: python3.8
+      Environment:
+        Variables:
+          CorsDomain: !Sub "https://s3-${AWS::Region}.amazonaws.com"
       Events:
         HelloWorld:
           Type: Api
