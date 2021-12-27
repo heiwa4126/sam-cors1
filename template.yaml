@@ -24,10 +24,13 @@ Resources:
     Type: AWS::Serverless::Api
     Properties:
       StageName: !Ref StageName
+      # Auth:
+      #   Authorizer: 'NONE'
       Cors:
         AllowOrigin: "'*'"
         AllowHeaders: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
         AllowMethods: "'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT'"
+        # AllowCredentials: true   'AllowOrigin' is "'*'"だと設定できない
 
   HelloFunction:
     Type: AWS::Serverless::Function

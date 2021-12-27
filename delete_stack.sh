@@ -10,3 +10,6 @@ aws s3 rm "s3://$BucketName/" --recursive --region "$REGION"
 aws cloudformation delete-stack \
     --region "$REGION" \
     --stack-name "$STACK_NAME"
+
+# stackが完全削除されるのを待ちたい場合は
+# 上のコマンドの代わりに `sam delete` を

@@ -1,9 +1,10 @@
+"""AWS Lambda sample for CORS."""
 import json
 from datetime import datetime, timezone
 
 
 def lambda_handler(event, context):
-
+    """Lambda handler."""
     return {
         "statusCode": 200,
         # optionsだけでなく、こちらにも要る
@@ -17,6 +18,8 @@ def lambda_handler(event, context):
             # "Access-Control-Allow-Methods": "DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT",
             "Access-Control-Allow-Methods": "GET,OPTIONS",
             # ↑optionsとちがっていてもOK。optionsより強めにすればいいらしい。
+            # "Access-Control-Allow-Credentials": "true",
+            # Access-Control-Allow-Originが*でない場合に設定するべき
         },
         "body": json.dumps({"message": "OK", "time": str(datetime.now(timezone.utc))}),
     }

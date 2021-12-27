@@ -4,7 +4,8 @@
 [function_build_definitions.ff8beae9-a115-4fe2-a43c-ed7bd6ca04fb]
 codeuri = "/home/heiwa/works/aws/sam/sam-cors1/hello"
 runtime = "python3.8"
-source_md5 = ""
+architecture = "x86_64"
+manifest_hash = ""
 packagetype = "Zip"
 functions = ["HelloFunction", "GoodbyeFunction"]
 

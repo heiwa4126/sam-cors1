@@ -134,3 +134,9 @@ CFnだと、プリフライトのOPTIONSの返すAccess-Control-Allow-*はゆる
 正しくないオリジン例:
 - www.example.com
 - http://www.example.com/
+
+# 参考
+
+* [CorsConfiguration - AWS Serverless Application Model](https://docs.aws.amazon.com/ja_jp/serverless-application-model/latest/developerguide/sam-property-api-corsconfiguration.html)
+* [Access-Control-Allow-Origin に設定する値として"マシ"なのはどちらか - SSTエンジニアブログ](https://techblog.securesky-tech.com/entry/2021/12/09/)
+* [Access-Control-Allow-Credentials - HTTP | MDN](https://developer.mozilla.org/ja/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)
